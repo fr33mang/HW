@@ -1,0 +1,8 @@
+version: "3"
+services:
+  finder_dev:
+    container_name: finder_dev
+    build: .
+    volumes:
+      - .:/app
+    command: python3 finder.py

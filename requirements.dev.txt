@@ -1,0 +1,4 @@
+pytest
+requests_mock
+flake8
+flake8-isort
