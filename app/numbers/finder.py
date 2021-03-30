@@ -45,4 +45,7 @@ if __name__ == "__main__":
         raise ValueError("pass links file path")
 
     links_file = sys.argv[1]
+    from datetime import datetime
+    start = datetime.now()
     find(links_file)
+    print(datetime.now() - start)

@@ -12,8 +12,9 @@
 
 ## Results:
 
-+ 0:00:37.735341 10 threads (TPE)
-+ 0:00:35.284306 20 threads 
-+ 0:00:46.067926 10 processes
-+ 0:00:44.389640 8 processes (PPE)
+### 400 urls
+
++ 0:00:30.471150 (ASYNC + ProcessPoolExecutor)
++ 0:00:35.284306 20 threads (SYNC + TPE)
++ 0:00:44.389640 8 processes (SUNC + PPE)
 + 0:00:46.432488 asyncio 10 workers (ASYNC)
