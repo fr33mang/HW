@@ -4,6 +4,7 @@
 
 + docker-compose build
 + docker-compose run finder_dev python3 app/numbers/finder.py file.txt
++ docker-compose run finder_dev python3 app/numbers/async_finder.py
 
 ## Tests:
 
