@@ -26,24 +26,23 @@ def use_regex(text):
         logger.info(f"Found number {number}")  # or save number
 
 
-async def get_phone(link, session, executor):
+async def get_phone(link, session, executor, loop):
     try:
         response = await session.get(link)
         text = await response.text()
     except Exception as e:
         logger.warning(e)
     else:
-        loop = asyncio.get_event_loop()
         await loop.run_in_executor(executor, use_regex(text))
 
 
-async def worker(name, queue, executor):
+async def worker(name, queue, executor, loop):
     async with aiohttp.ClientSession() as session:
         while True:
             url = await queue.get()
 
             try:
-                await get_phone(url, session, executor)
+                await get_phone(url, session, executor, loop)
             except Exception as e:
                 print(e)
 
@@ -59,9 +58,10 @@ async def producer(queue):
 async def main():
     queue = asyncio.Queue(maxsize=50)
     executor = ProcessPoolExecutor(max_workers=4)
+    loop = asyncio.get_event_loop()
     tasks = []
     for i in range(10):
-        worker_task = asyncio.create_task(worker(f"worker {i}", queue, executor))
+        worker_task = asyncio.create_task(worker(f"worker {i}", queue, executor, loop))
         tasks.append(worker_task)
 
     await producer(queue)
